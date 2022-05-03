@@ -12,10 +12,14 @@ struct PersistenceController {
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
+        //viewContext=NSManagedObjectContext="NSManagedObjectのサブクラス"を管理するクラス。
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for index in 0..<10 {
+            let newMemo = Memo(context: viewContext)
+               newMemo.title = "メモタイトル\(index + 1)"
+               newMemo.content = "メモ\(index + 1)の内容が記載されています"
+               newMemo.createAt = Date()
+               newMemo.updateAt = Date()
         }
         do {
             try viewContext.save()
@@ -28,6 +32,7 @@ struct PersistenceController {
         return result
     }()
 
+    //NSPersistentContainerは、マネージドオブジェクトモデル（NSManagedObjectModel）、永続ストアコーディネータ（NSPersistentStoreCoordinator）、マネージドオブジェクトコンテキスト（NSManagedObjectContext）の作成を処理し、コアデータスタックの作成と管理を簡素化します。
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {

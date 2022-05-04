@@ -14,13 +14,13 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         //viewContext=NSManagedObjectContext="NSManagedObjectのサブクラス"を管理するクラス。
         let viewContext = result.container.viewContext
-        for index in 0..<10 {
-            let newMemo = Memo(context: viewContext)
-               newMemo.title = "メモタイトル\(index + 1)"
-               newMemo.content = "メモ\(index + 1)の内容が記載されています"
-               newMemo.createAt = Date()
-               newMemo.updateAt = Date()
-        }
+//        for index in 0..<10 {
+//            let newMemo = Memo(context: viewContext)
+//               newMemo.title = "メモタイトル\(index + 1)"
+//               newMemo.content = "メモ\(index + 1)の内容が記載されています"
+//               newMemo.createAt = Date()
+//               newMemo.updateAt = Date()
+//        }
         do {
             try viewContext.save()
         } catch {
